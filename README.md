@@ -11,5 +11,4 @@ user:
 admin
 
 3. install application
-
 kubectl apply -f application.yaml
