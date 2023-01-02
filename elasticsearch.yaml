@@ -5,7 +5,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: logging
   source:
     repoURL: 'https://helm.elastic.co'
     targetRevision: 7.9.0
