@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elasticsearch
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://helm.elastic.co'
+    targetRevision: 7.9.0
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: replicas
+          value: '1'
+        - name: resources.limits.cpu
+          value: 100m
+        - name: resources.requests.cpu
+          value: 100m
+        - name: volumeClaimTemplate.resources.requests.storage
+          value: 10Gi
+    chart: elasticsearch
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: log
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
