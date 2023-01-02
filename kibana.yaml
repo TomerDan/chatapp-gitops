@@ -5,14 +5,14 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: logging
+  project: default
   source:
     repoURL: 'https://helm.elastic.co'
     targetRevision: 7.9.0
     chart: kibana
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: log
+    namespace: logging
   syncPolicy:
     automated:
       prune: true

@@ -5,7 +5,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: logging
+  project: default
   source:
     helm:
       values: |
@@ -25,7 +25,7 @@ spec:
     targetRevision: 0.19.20
   destination:
     server: https://kubernetes.default.svc
-    namespace: log
+    namespace: logging
 
   syncPolicy:
     syncOptions:
