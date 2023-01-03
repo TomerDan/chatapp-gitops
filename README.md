@@ -11,4 +11,4 @@ user:
 admin
 
 3. install application
-kubectl apply -f application.yaml
+kubectl apply -f appofapps.yaml
