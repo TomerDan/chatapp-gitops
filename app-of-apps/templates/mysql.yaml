@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql
+  namespace: default
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    helm:
+      values: |
+        initdbScripts: 
+          initdb.sql: |
+            CREATE DATABASE IF NOT EXISTS `mydb`;
+            USE `mydb`;
+            CREATE TABLE IF NOT EXISTS `msg_table` (`user_id` int(11) NOT NULL AUTO_INCREMENT,`usernamedb` varchar(255) DEFAULT NULL,`msgdb` varchar(50) DEFAULT NULL,PRIMARY KEY (`user_id`)) 
+            ENGINE=MyISAM AUTO_INCREMENT=10002 ;
+    repoURL: https://charts.bitnami.com/bitnami 
+    targetRevision: 9.4.4
+    chart: mysql
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
