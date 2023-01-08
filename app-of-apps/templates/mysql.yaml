@@ -17,32 +17,15 @@ spec:
             CREATE TABLE IF NOT EXISTS `msg_table` (`user_id` int(11) NOT NULL AUTO_INCREMENT,`usernamedb` varchar(255) DEFAULT NULL,`msgdb` varchar(50) DEFAULT NULL,PRIMARY KEY (`user_id`)) 
             ENGINE=MyISAM AUTO_INCREMENT=10002 ;
         auth:
-          ## @param auth.rootPassword Password for the `root` user. Ignored if existing secret is provided
-          ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#setting-the-root-password-on-first-run
-          ##
           rootPassword: "root"
-          ## @param auth.createDatabase Wheter to create the .Values.auth.database or not
-          ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-on-first-run
-          ##
           createDatabase: true
-          ## @param auth.database Name for a custom database to create
-          ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-on-first-run
-          ##
           database: "my_database"
-          ## @param auth.username Name for a custom user to create
-          ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-user-on-first-run
-          ##
           username: "root"
-          ## @param auth.password Password for the new user. Ignored if existing secret is provided
-          ##
           password: "root"
-          ## @param auth.replicationUser MySQL replication user
-          ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#setting-up-a-replication-cluster
-          ##
           replicationUser: replicator
-          ## @param auth.replicationPassword MySQL replication user password. Ignored if existing secret is provided
-          ##
           replicationPassword: "root"
+        global:
+          storageClass: "standard-rwo"
     repoURL: https://charts.bitnami.com/bitnami 
     targetRevision: 9.4.4
     chart: mysql
